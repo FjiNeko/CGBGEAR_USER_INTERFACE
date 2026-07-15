@@ -1,0 +1,1297 @@
+/* --- 页面基础布局 --- */
+.create-trade-page {
+  background-color: #050505;
+  min-height: 100vh;
+  padding-top: 100px; /* 避开导航栏 */
+  padding-bottom: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.trade-form-container {
+  width: 100%;
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+/* --- 页面标题 --- */
+.trade-page-header {
+  margin-bottom: 30px;
+}
+
+.trade-main-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #f5f5f5;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.trade-deco-text {
+  font-size: 14px;
+  color: #22c55e; /* 品牌绿 */
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* --- 错误提示 --- */
+.trade-error-banner {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+/* --- 表单分块 --- */
+.trade-form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-section {
+  background: #141414; /* 深灰卡片背景 */
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 24px 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 24px;
+  border-left: 4px solid #22c55e;
+  padding-left: 12px;
+  line-height: 1;
+}
+
+/* --- 通用表单控件 --- */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.field-label {
+  display: block;
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.field-label.required::after {
+  content: " *";
+  color: #ef4444;
+}
+
+.field-hint {
+  font-size: 12px;
+  color: #666;
+  margin-top: 6px;
+}
+
+.trade-input,
+.trade-textarea,
+.trade-select {
+  width: 100%;
+  background: #0a0a0a;
+  border: 1px solid #333;
+  color: #f5f5f5;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.trade-input:focus,
+.trade-textarea:focus,
+.trade-select:focus {
+  border-color: #22c55e;
+}
+
+.trade-textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* --- 图片上传网格 --- */
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.img-preview-box,
+.upload-box {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.img-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid #333;
+}
+
+.remove-img-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-box {
+  background: #1a1a1a;
+  border: 1px dashed #444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+}
+
+.upload-box:hover {
+  border-color: #22c55e;
+  background: #202020;
+}
+
+.upload-box input {
+  display: none;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #666;
+}
+
+.plus-icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.upload-text {
+  font-size: 12px;
+}
+
+/* --- 第二栏布局 --- */
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* 价格前缀 */
+.input-with-prefix {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-prefix .prefix {
+  position: absolute;
+  left: 12px;
+  color: #888;
+  font-weight: bold;
+}
+
+.input-with-prefix input {
+  padding-left: 25px;
+}
+
+/* 预算范围 */
+.budget-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.budget-inputs .separator {
+  color: #666;
+}
+
+/* --- 第三栏：联系方式 --- */
+.contact-method-row {
+  display: flex;
+  align-items: flex-start;
+  background: #0a0a0a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.contact-icon {
+  width: 100px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #e5e5e5;
+  font-size: 14px;
+  font-weight: 600;
+  padding-top: 10px; /* 对齐输入框 */
+}
+
+.wechat-icon { color: #07c160; }
+.xianyu-icon { color: #ffda00; } /* 闲鱼黄 */
+
+.contact-inputs {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.qr-upload-wrapper {
+  display: flex;
+}
+
+.qr-upload-btn {
+  font-size: 12px;
+  color: #22c55e;
+  border: 1px dashed #444;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  background: #111;
+}
+
+.qr-upload-btn:hover {
+  border-color: #22c55e;
+}
+
+.qr-upload-btn input {
+  display: none;
+}
+
+.qr-preview {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.qr-preview img {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.qr-preview button {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* --- 底部按钮 --- */
+.form-submit-area {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.trade-submit-btn {
+  background: #22c55e; /* 纯色，高亮 */
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px 80px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(163, 230, 53, 0.4);
+}
+
+.trade-submit-btn:hover {
+  background: #84cc16;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(163, 230, 53, 0.5);
+}
+
+.trade-submit-btn:disabled {
+  background: #444;
+  color: #888;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* 联系方式行：垂直居中对齐 */
+.contact-method-row {
+  display: flex;
+  align-items: center; /* 关键：改为居中，防止图标和内容错位 */
+  background: #0a0a0a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 12px 16px; /* 减小内边距 */
+  margin-bottom: 12px;
+  gap: 15px;
+}
+
+/* 图标区域：强制固定 */
+.contact-icon {
+  width: 130px; /* 增加一点宽度容纳文字 */
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e5e5e5;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* 强制 SVG 尺寸，防止被原始属性(200px)撑大 */
+.contact-svg {
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0;
+}
+
+/* 输入框容器：改为横向排列 */
+.contact-inputs {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row; /* 关键：横向排列 */
+  align-items: center;
+  gap: 12px;
+}
+
+/* 联系方式专用输入框微调 */
+.contact-inputs .trade-input {
+  flex: 1; /* 占据剩余空间 */
+  max-width: 300px; /* 限制最大宽度，防止在宽屏下太长 */
+  margin-bottom: 0; /* 移除之前的底部边距 */
+}
+
+/* 二维码上传区域：防止由于 flex 造成的拉伸 */
+.qr-upload-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.qr-preview {
+  position: relative;
+  width: 42px; /* 减小预览图尺寸 */
+  height: 42px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background: #000;
+}
+
+.qr-upload-btn {
+  font-size: 11px;
+  color: #22c55e;
+  border: 1px dashed #444;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #111;
+  white-space: nowrap; /* 防止文字换行 */
+}
+
+/* 移动端特殊处理：在小屏下恢复纵向 */
+@media (max-width: 768px) {
+  .contact-method-row {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .contact-icon {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .contact-inputs {
+    width: 100%;
+    flex-direction: row; /* 移动端保持一行通常更省空间，如果太挤可以改回 column */
+  }
+  
+  .contact-inputs .trade-input {
+    max-width: none;
+  }
+}
+
+
+/* --- 移动端适配 --- */
+@media (max-width: 768px) {
+  .form-row-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-method-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .contact-icon {
+    width: 100%;
+    padding-top: 0;
+  }
+  
+  .trade-submit-btn {
+    width: 100%;
+  }
+}
+
+/* ==========================================================
+   交易市场主容器
+   ========================================================== */
+.trade-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+  background-color: #050505;
+}
+
+/* --- 标题部分 --- */
+.trade-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.trade-title {
+  font-size: 42px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  font-family: 'Orbitron', sans-serif; /* 如果没有这个字体会回退 */
+}
+
+.golden-glow {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(163, 230, 53, 0.5),
+               0 0 20px rgba(163, 230, 53, 0.2);
+}
+
+/* --- 发布按钮区域 --- */
+.trade-actions {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.trade-btn {
+  position: relative;
+  width: 260px;
+  height: 80px;
+  border: 1px solid #333;
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.trade-btn .btn-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 2;
+  text-align: left;
+}
+
+.trade-btn .zh {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.trade-btn .en {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* 背景图标与箭头动画 */
+.bg-icon-wrapper {
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.1;
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.money-bag {
+  width: 80px;
+  height: 80px;
+  fill: #fff;
+}
+
+.action-arrow {
+  width: 24px;
+  height: 24px;
+  fill: #22c55e;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.4s ease;
+}
+
+/* 按钮 Hover 状态 */
+.btn-sell:hover {
+  border-color: #22c55e;
+  box-shadow: 0 0 20px rgba(163, 230, 53, 0.2);
+}
+
+.btn-buy:hover {
+  border-color: #22c55e;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+}
+
+.trade-btn:hover .bg-icon-wrapper {
+  right: 15px;
+  opacity: 0.2;
+}
+
+.trade-btn:hover .action-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.trade-btn:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================================
+   筛选栏
+   ========================================================== */
+.trade-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 40px;
+  padding: 20px;
+  background: #0a0a0a;
+  border-radius: 12px;
+  border: 1px solid #1a1a1a;
+}
+
+.filter-select {
+  background: #111;
+  border: 1px solid #333;
+  color: #ccc;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.filter-select:focus {
+  border-color: #22c55e;
+  color: #fff;
+}
+
+/* ==========================================================
+   世界地图
+   ========================================================== */
+.trade-map-container {
+  background: #0a0a0a;
+  border-radius: 16px;
+  border: 1px solid #1a1a1a;
+  margin-bottom: 40px;
+  padding: 20px;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
+}
+
+/* ==========================================================
+   交易卡片网格
+   ========================================================== */
+.trade-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.trade-card {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.trade-card:hover {
+  transform: translateY(-8px);
+  border-color: #444;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+
+/* 图片区域 */
+.card-img-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* 强制正方形 */
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.trade-card:hover .card-img {
+  transform: scale(1.08);
+}
+
+/* 卡片内容 */
+.card-body {
+  padding: 16px;
+}
+
+.card-tags {
+  margin-bottom: 10px;
+}
+
+.tag {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.tag-sell {
+  background: rgba(163, 230, 53, 0.1);
+  color: #22c55e;
+  border: 1px solid rgba(163, 230, 53, 0.3);
+}
+
+.tag-buy {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #eee;
+  margin-bottom: 8px;
+  height: 40px; /* 两行高度限制 */
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #22c55e;
+  margin-bottom: 15px;
+}
+
+/* 卡片页脚 */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid #222;
+  font-size: 12px;
+  color: #666;
+}
+
+.card-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-avatar-sm {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #333;
+}
+
+/* ==========================================================
+   响应式处理
+   ========================================================== */
+@media (max-width: 768px) {
+  .trade-title {
+    font-size: 28px;
+  }
+
+  .trade-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .trade-btn {
+    width: 100%;
+    max-width: 320px;
+    height: 70px;
+  }
+
+  .trade-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+  }
+
+  .card-title {
+    font-size: 13px;
+    height: 36px;
+  }
+
+  .card-price {
+    font-size: 15px;
+  }
+
+  .filter-select {
+    flex: 1;
+    min-width: 120px;
+  }
+}
+
+/* ==========================================================
+   交易详情页 (Trade Detail Page) - Xianyu Style Dark Mode
+   ========================================================== */
+
+.trade-detail-page {
+  padding-top: 100px; /* 避开固定导航栏 */
+  padding-bottom: 60px;
+  background-color: #050505;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trade-page-loading, .trade-page-error {
+  padding-top: 150px;
+  text-align: center;
+  color: #888;
+  font-size: 18px;
+}
+
+/* --- 1. 顶部用户信息条 --- */
+.trade-user-header {
+  width: 100%;
+  max-width: 1100px;
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 16px 24px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #333;
+}
+
+.header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.header-username {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.header-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #888;
+}
+
+.meta-tag {
+  background: rgba(163, 230, 53, 0.15);
+  color: #22c55e;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.header-btn {
+  background: transparent;
+  border: 1px solid #444;
+  color: #ccc;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.header-btn:hover {
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+/* --- 2. 主卡片布局 (左右结构) --- */
+.trade-main-card {
+  width: 100%;
+  max-width: 1100px;
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr; /* 左侧图片稍宽 */
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+/* 左侧画廊 */
+.trade-gallery {
+  display: flex;
+  gap: 12px;
+  height: 500px; /* 固定高度确保对齐 */
+}
+
+/* 缩略图列 */
+.gallery-thumbs-col {
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox hide scrollbar */
+}
+.gallery-thumbs-col::-webkit-scrollbar { display: none; }
+
+.thumb-item {
+  width: 70px;
+  height: 70px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all 0.2s;
+}
+
+.thumb-item.active, .thumb-item:hover {
+  border-color: #22c55e;
+  opacity: 1;
+}
+
+.thumb-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 主图展示 */
+.gallery-main-view {
+  flex: 1;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #222;
+}
+
+.gallery-main-view img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* --- 右侧信息面板 --- */
+.trade-info-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 价格行 */
+.info-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #222;
+  padding-bottom: 15px;
+}
+
+.price-wrap {
+  color: #ff5000; /* 闲鱼红/橙，或者改用品牌绿 #22c55e */
+  font-weight: 800;
+  display: flex;
+  align-items: baseline;
+}
+
+.price-wrap .currency { font-size: 20px; margin-right: 4px; }
+.price-wrap .amount { font-size: 36px; line-height: 1; }
+.price-wrap .shipping-tag {
+  font-size: 12px;
+  background: #333;
+  color: #ccc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 10px;
+  font-weight: normal;
+  transform: translateY(-4px);
+}
+
+.views-wrap {
+  font-size: 12px;
+  color: #666;
+  text-align: right;
+}
+
+.condition-badge {
+  background: #22c55e;
+  color: #000;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 2px;
+  margin-right: 8px;
+  font-size: 12px;
+}
+
+/* 描述内容 */
+.info-content-block {
+  margin-bottom: 30px;
+  flex: 1;
+}
+
+.desc-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.item-description {
+  font-size: 15px;
+  color: #ccc;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+/* 属性网格 */
+.info-attrs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 30px;
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.attr-item {
+  font-size: 13px;
+}
+
+.attr-label {
+  color: #666;
+  margin-right: 10px;
+}
+
+.attr-value {
+  color: #e5e5e5;
+}
+
+/* 联系方式框 */
+.info-contact-box {
+  background: rgba(163, 230, 53, 0.05);
+  border: 1px solid rgba(163, 230, 53, 0.2);
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 25px;
+}
+
+.contact-title {
+  font-size: 12px;
+  color: #22c55e;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-row {
+  font-size: 14px;
+  color: #fff;
+}
+
+.c-label { color: #888; margin-right: 8px; }
+.qr-badge { 
+  font-size: 10px; background: #333; color: #ccc; 
+  padding: 1px 4px; border-radius: 3px; margin-left: 8px; 
+}
+
+/* 底部操作区 */
+.info-action-area {
+  margin-top: auto;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.btn-i-want {
+  flex: 1;
+  background: #22c55e;
+  color: #000;
+  border: none;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 800;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.btn-i-want:hover {
+  background: #84cc16;
+}
+
+.btn-i-want.active {
+  background: #333;
+  color: #888;
+}
+
+.btn-chat {
+  flex: 1;
+  background: #333;
+  color: #fff;
+  border: 1px solid #444;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: border-color 0.2s;
+}
+
+.btn-chat:hover {
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+.trade-warning-note {
+  font-size: 12px;
+  color: #666;
+  background: #0f0f0f;
+  padding: 8px 12px;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+
+/* --- 3. 底部评论区 --- */
+.trade-comments-container {
+  width: 100%;
+  max-width: 1100px;
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.section-header {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 20px;
+  border-left: 4px solid #22c55e;
+  padding-left: 12px;
+}
+
+.section-header .count {
+  font-size: 14px;
+  color: #666;
+  font-weight: normal;
+  margin-left: 6px;
+}
+
+.comment-input-area {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.comment-input-area textarea {
+  flex: 1;
+  background: #0a0a0a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff;
+  resize: vertical;
+  min-height: 50px;
+}
+
+.comment-input-area button {
+  width: 100px;
+  background: #222;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.comment-input-area button:hover:not(:disabled) {
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+/* 评论列表 */
+.comment-item {
+  display: flex;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid #222;
+}
+
+.comment-item:last-child {
+  border-bottom: none;
+}
+
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #333;
+}
+
+.comment-header {
+  margin-bottom: 6px;
+}
+
+.comment-user {
+  font-weight: bold;
+  color: #e5e5e5;
+  margin-right: 10px;
+}
+
+.comment-time {
+  font-size: 12px;
+  color: #666;
+}
+
+.comment-text {
+  color: #ccc;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* --- 移动端适配 --- */
+@media (max-width: 900px) {
+  .trade-main-card {
+    grid-template-columns: 1fr; /* 变为单列 */
+    gap: 20px;
+  }
+  
+  .trade-gallery {
+    height: auto;
+    flex-direction: column-reverse; /* 缩略图在下 */
+  }
+  
+  .gallery-thumbs-col {
+    width: 100%;
+    flex-direction: row;
+    height: 70px;
+    overflow-x: auto;
+  }
+
+  .gallery-main-view {
+    height: 350px;
+  }
+  
+  .trade-user-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .user-header-right {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

@@ -1,0 +1,255 @@
+/* src/pages/AdminDashboard.css */
+
+/* --- 布局容器 --- */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #050505; /* 保持与 main.css page 一致 */
+    color: #f5f5f5;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- 左侧边栏 --- */
+.admin-sidebar {
+    width: 250px;
+    background-color: #0a0a0a;
+    border-right: 1px solid var(--terminal-border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    position: fixed; /* PC端固定 */
+    height: 100vh;
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+/* Logo 区域 */
+.admin-logo {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #222;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #00ff00;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 导航链接 */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.nav-item {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--terminal-secondary-text-color);
+    transition: all 0.2s;
+    cursor: pointer;
+    font-size: 0.95rem;
+    border-left: 3px solid transparent;
+}
+
+.nav-item:hover {
+    background-color: rgba(0, 255, 0, 0.05);
+    color: #fff;
+}
+
+.nav-item.active {
+    background-color: rgba(0, 255, 0, 0.1);
+    color: #00ff00;
+    border-left-color: #00ff00;
+}
+
+/* 图标通用样式 (SVG) */
+.icon-svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+
+/* --- 右侧内容区域 --- */
+.admin-content {
+    flex: 1;
+    margin-left: 250px; /* 留出侧边栏宽度 */
+    padding: 30px;
+    width: calc(100% - 250px);
+}
+
+.admin-header {
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--terminal-border-color);
+    padding-bottom: 15px;
+}
+
+.admin-title {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.admin-subtitle {
+    color: var(--terminal-secondary-text-color);
+    font-size: 0.9rem;
+}
+
+/* --- 卡片组件风格 --- */
+.admin-card {
+    border: 1px solid var(--terminal-border-color);
+    background: rgba(0, 20, 0, 0.2); /* 微弱的绿色背景 */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 4px; /* 轻微圆角 */
+}
+
+.card-title {
+    color: #00ff00;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    border-bottom: 1px dashed #333;
+    padding-bottom: 10px;
+}
+
+/* --- 表单元素风格 (复刻终端感) --- */
+.terminal-input {
+    background: #000;
+    border: 1px solid #333;
+    color: #00ff00;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    font-family: monospace;
+}
+
+.terminal-input:focus {
+    outline: none;
+    border-color: #00ff00;
+    box-shadow: 0 0 5px var(--terminal-shadow-color);
+}
+
+.terminal-btn {
+    background: transparent;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 8px 16px;
+    font-family: monospace;
+    transition: all 0.2s;
+    display: inline-block;
+}
+
+.terminal-btn:hover {
+    background: #00ff00;
+    color: #000;
+    box-shadow: 0 0 10px var(--terminal-shadow-color);
+}
+
+.terminal-btn:disabled {
+    border-color: #555;
+    color: #555;
+    cursor: not-allowed;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* --- 移动端适配 --- */
+.mobile-toggle {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 200;
+    background: #000;
+    border: 1px solid #00ff00;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 90;
+    backdrop-filter: blur(2px);
+}
+
+@media (max-width: 768px) {
+    .admin-sidebar {
+        transform: translateX(-100%); /* 默认移出屏幕 */
+        width: 80%;
+        max-width: 300px;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.8);
+    }
+
+    .admin-sidebar.open {
+        transform: translateX(0);
+    }
+
+    .admin-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 70px 15px 20px; /* 顶部留出按钮空间 */
+    }
+
+    .mobile-toggle {
+        display: block;
+    }
+
+    .overlay.open {
+        display: block;
+    }
+    
+    /* 手机端表格优化 */
+    .admin-card {
+        padding: 15px;
+        overflow-x: auto;
+    }
+    
+    .admin-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    /* 表格横向滚动 */
+    table {
+        min-width: 800px;
+        font-size: 0.85rem;
+    }
+    
+    table th,
+    table td {
+        padding: 8px !important;
+        white-space: nowrap;
+    }
+    
+    /* 按钮组优化 */
+    .terminal-btn {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+    
+    /* 输入框优化 */
+    .terminal-input {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+    
+    /* 分页导航优化 */
+    .admin-card > div:last-child {
+        overflow-x: auto;
+        padding: 10px 0;
+    }
+}
