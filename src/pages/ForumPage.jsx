@@ -1,8 +1,17 @@
-// src/pages/ForumPage.jsx
+/*
+ * Copyright (C) 2026 FjiNeko
+ * * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
-//根据forumPage.jsx，写一个手机论坛APP的页面文件MobileForumPage.jsx，保持引用的api，context，函数引入正确
-//布局如下（由上往下）：分类标签栏（整个页面左上角，api/forum/modules）、公告区、二级分类标签（api/forum/modules，获取的subsection里面）、帖子列表
-//分类标签栏选中状态，字体颜色为白色且字号略大于未选中的
 import React, { useState, useEffect, useCallback } from 'react';
 import "../css/main.css"; // 确保 CSS 路径正确
 import { useNavigate, Link } from "react-router-dom";
