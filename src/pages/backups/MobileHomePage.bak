@@ -1,0 +1,327 @@
+import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import "../css/main.css"; // 引入基础样式
+
+// API
+import { getHomeStats, getForumPosts, fetchAnnouncementDates, fetchAnnouncementsByDateAndLang } from "../api/api";
+import { useAuth } from "../context/AuthContext";
+import { formatDate } from "../utils/dateUtils";
+
+// 组件
+import UserAvatar from "../components/UserAvatar";
+import { MobileBottomNav } from "../components/MainNav"; // 引入底部导航
+
+// 辅助函数：提取 HTML 中的图片
+const extractImages = (htmlContent) => {
+  if (!htmlContent) return [];
+  const doc = new DOMParser().parseFromString(htmlContent, 'text/html');
+  const imgs = doc.querySelectorAll('img');
+  // 返回前 3 张图片的 src
+  return Array.from(imgs).map(img => img.src).slice(0, 3);
+};
+
+// 辅助函数：提取纯文本摘要
+const extractText = (htmlContent) => {
+  if (!htmlContent) return "";
+  const doc = new DOMParser().parseFromString(htmlContent, 'text/html');
+  return doc.body.textContent || "";
+};
+
+const MobileHomePage = () => {
+  const navigate = useNavigate();
+  const { user: currentUser } = useAuth();
+  const [activeTab, setActiveTab] = useState("latest");
+  const [searchText, setSearchText] = useState("");
+  
+  // 数据状态
+  const [posts, setPosts] = useState([]);
+  const [loadingPosts, setLoadingPosts] = useState(true);
+  const [announcement, setAnnouncement] = useState("正在获取最新公告...");
+
+  // 获取公告逻辑 (获取最新的一条)
+  useEffect(() => {
+    const fetchNotice = async () => {
+      try {
+        const datesRes = await fetchAnnouncementDates();
+        if (datesRes.code === 200 && datesRes.data.dates.length > 0) {
+          const latestDate = datesRes.data.dates[0];
+          const annRes = await fetchAnnouncementsByDateAndLang(latestDate, 'zh-cn', 1);
+          if (annRes.code === 200 && annRes.data.announcements.length > 0) {
+            setAnnouncement(annRes.data.announcements[0].title);
+          } else {
+            setAnnouncement("暂无最新公告");
+          }
+        }
+      } catch (e) {
+        setAnnouncement("系统通知：欢迎来到 CGBGEAR 社区");
+      }
+    };
+    fetchNotice();
+  }, []);
+
+  // 获取帖子列表
+  useEffect(() => {
+    const fetchFeed = async () => {
+      setLoadingPosts(true);
+      try {
+        // 根据 Tab 切换不同的参数 (模拟)
+        const params = { limit: 10, page: 1 };
+        if (activeTab === 'hot') params.sort = 'hot'; 
+        
+        const res = await getForumPosts(params);
+        if (res.code === 200 && res.data.posts) {
+          setPosts(res.data.posts);
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoadingPosts(false);
+      }
+    };
+    fetchFeed();
+  }, [activeTab]);
+
+  const handleSearch = () => {
+    if(searchText.trim()) navigate(`/search?keywords=${searchText}`);
+  };
+
+  // --- 样式对象 (内联布局) ---
+  const styles = {
+    container: {
+      paddingBottom: '60px', // 留出底部导航空间
+      background: '#000',
+      minHeight: '100vh',
+      color: '#fff'
+    },
+    header: {
+      display: 'flex', alignItems: 'center', gap: '10px',
+      padding: '10px 15px', background: '#000', position: 'sticky', top: 0, zIndex: 90
+    },
+    searchBox: {
+      flex: 1, background: '#1a1a1a', borderRadius: '20px', 
+      display: 'flex', alignItems: 'center', padding: '6px 12px', height: '36px'
+    },
+    searchInput: {
+      background: 'transparent', border: 'none', color: '#fff', fontSize: '14px', width: '100%', outline: 'none'
+    },
+    topTabs: {
+      display: 'flex', justifyContent: 'space-around', padding: '10px 0', 
+      fontSize: '15px', fontWeight: 'bold', borderBottom: '1px solid #1a1a1a'
+    },
+    bannerSection: {
+      padding: '10px 15px',
+    },
+    bannerCard: {
+      width: '100%', height: '140px', borderRadius: '8px', 
+      backgroundImage: "url('https://img.cgbgear.cn/wpage/btn/wrapper-btn/wrapper-product.png_.webp')",
+      backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', overflow: 'hidden'
+    },
+    gridMenu: {
+      display: 'flex', justifyContent: 'space-between', padding: '20px 15px', textAlign: 'center'
+    },
+    gridItem: {
+      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#ccc'
+    },
+    gridIcon: {
+      width: '45px', height: '45px', background: '#1a1a1a', borderRadius: '12px', 
+      display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6af500'
+    },
+    noticeBar: {
+      display: 'flex', alignItems: 'center', padding: '10px 15px', 
+      background: '#0a0a0a', borderTop: '5px solid #000', borderBottom: '5px solid #000'
+    },
+    feedFilter: {
+      display: 'flex', gap: '25px', padding: '15px 15px 5px', fontSize: '15px', color: '#888', overflowX: 'auto'
+    },
+    postList: {
+      padding: '0 15px'
+    },
+    postItem: {
+      padding: '15px 0', borderBottom: '1px solid #1a1a1a'
+    },
+    postTitle: {
+      fontSize: '16px', fontWeight: '500', lineHeight: '1.4', marginBottom: '8px',
+      display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden'
+    },
+    imageGrid: {
+      display: 'flex', gap: '4px', marginBottom: '8px', height: '80px', overflow: 'hidden'
+    },
+    postMeta: {
+      display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#666', alignItems: 'center'
+    }
+  };
+
+  return (
+    <div style={styles.container}>
+      {/* 1. 顶部搜索栏 */}
+      <div style={styles.header}>
+        <div onClick={() => currentUser ? navigate('/user-center') : navigate('/terminal/login')}>
+          <UserAvatar username={currentUser?.username} avatarUrl={currentUser?.avatar_url} size="32px" />
+        </div>
+        <div style={styles.searchBox}>
+          <svg style={{width:'16px', height:'16px', color:'#666', marginRight:'8px'}} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input 
+            style={styles.searchInput} 
+            placeholder="搜索战术装备 / 玩家" 
+            value={searchText}
+            onChange={e => setSearchText(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && handleSearch()}
+          />
+        </div>
+        <div style={{display:'flex', gap:'10px'}}>
+           {/* 发布图标 */}
+           <div onClick={() => navigate('/forum/new-post')} style={{cursor:'pointer'}}>
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6af500" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+           </div>
+        </div>
+      </div>
+
+      {/* 2. 顶部 Tab (聚焦/NERF/今日热议) */}
+      <div style={styles.topTabs}>
+        <span style={{color: '#fff', borderBottom: '2px solid #6af500', paddingBottom: '4px'}}>聚焦</span>
+        <span style={{color: '#888'}}>NERF</span>
+        <span style={{color: '#888'}}>今日热议</span>
+        <span style={{color: '#888'}}>本周最热</span>
+      </div>
+
+      {/* 3. Banner */}
+      <div style={styles.bannerSection}>
+        <div style={styles.bannerCard} onClick={() => navigate('/product')}>
+           <div style={{position:'absolute', bottom:'10px', left:'15px', textShadow:'0 2px 4px rgba(0,0,0,0.8)'}}>
+             <div style={{fontSize:'16px', fontWeight:'bold', fontStyle:'italic'}}>SUPER SUPPLY</div>
+             <div style={{fontSize:'10px'}}>创研超级玩家 · 装备定制</div>
+           </div>
+        </div>
+      </div>
+
+      {/* 4. 常用工具 (Grid Menu) */}
+      <div style={{padding:'0 15px', marginTop:'10px', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+        <span style={{fontWeight:'bold', fontSize:'15px'}}>常用工具</span>
+        <span style={{fontSize:'20px', color:'#666'}}>+</span>
+      </div>
+      <div style={styles.gridMenu}>
+        <div style={styles.gridItem} onClick={() => navigate('/forum')}>
+          <div style={styles.gridIcon}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="10" y2="9"></line></svg>
+          </div>
+          <span>造型论坛</span>
+        </div>
+        <div style={styles.gridItem} onClick={() => navigate('/product')}>
+          <div style={styles.gridIcon}>
+             <svg width="24" height="24" viewBox="0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          </div>
+          <span>歼敌商城</span>
+        </div>
+        <div style={styles.gridItem} onClick={() => navigate('/notice')}>
+          <div style={styles.gridIcon}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          </div>
+          <span>公告通知</span>
+        </div>
+        <div style={styles.gridItem} onClick={() => navigate('/trade')}>
+          <div style={styles.gridIcon}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <span>全部工具</span>
+        </div>
+      </div>
+
+      {/* 5. 中部 Banner (新手引导) */}
+      <div style={{padding:'0 15px'}}>
+         <div style={{
+           width:'100%', height:'80px', borderRadius:'6px',
+           backgroundImage: "url('https://img.cgbgear.cn/wpage/btn/wrapper-btn/wrapper-forum.PNG_.webp')",
+           backgroundSize:'cover', backgroundPosition:'center',
+           display:'flex', alignItems:'center', justifyContent:'flex-end', paddingRight:'20px'
+         }}>
+            <div style={{textAlign:'right', textShadow:'0 2px 4px #000'}}>
+              <div style={{fontSize:'18px', fontWeight:'bold'}}>引导入门</div>
+              <div style={{fontSize:'12px'}}>新手必看</div>
+            </div>
+         </div>
+      </div>
+
+      {/* 6. 滚动公告 */}
+      <div style={styles.noticeBar} onClick={() => navigate('/notice')}>
+        <span style={{
+          color:'#ff4d4f', border:'1px solid #ff4d4f', fontSize:'10px', 
+          padding:'1px 4px', borderRadius:'2px', marginRight:'8px', whiteSpace:'nowrap'
+        }}>公告</span>
+        <div style={{fontSize:'13px', color:'#ccc', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'}}>
+          {announcement}
+        </div>
+      </div>
+
+      {/* 7. 信息流筛选 Tab */}
+      <div style={styles.feedFilter}>
+        <span 
+          style={{color: activeTab==='latest'?'#000':'#888', fontWeight:'bold', fontSize:'16px', position:'relative'}}
+          onClick={() => setActiveTab('latest')}
+        >
+          无余
+          {activeTab==='latest' && <span style={{position:'absolute', bottom:'-5px', left:'0', width:'100%', height:'3px', background:'#000'}}></span>}
+        </span>
+        <span style={{color: activeTab==='new'?'#fff':'#888'}} onClick={() => setActiveTab('new')}>今日新帖</span>
+        <span style={{color: activeTab==='trade'?'#fff':'#888'}} onClick={() => setActiveTab('trade')}>玩具交易</span>
+        <span style={{color: activeTab==='sat'?'#fff':'#888'}} onClick={() => setActiveTab('sat')}>卫星</span>
+        <span style={{color: activeTab==='guide'?'#fff':'#888'}} onClick={() => setActiveTab('guide')}>引导入门</span>
+      </div>
+
+      {/* 8. 帖子列表 (截图样式) */}
+      <div style={styles.postList}>
+        {loadingPosts ? (
+           <div style={{padding:'20px', textAlign:'center', color:'#666'}}>加载中...</div>
+        ) : (
+           posts.map(post => {
+             const images = extractImages(post.content);
+             const hasImages = images.length > 0;
+             const plainText = extractText(post.content).slice(0, 60);
+
+             return (
+               <div key={post.id} style={styles.postItem} onClick={() => navigate(`/thread/${post.id}`)}>
+                 <div style={styles.postTitle}>{post.title}</div>
+                 
+                 {/* 图片 Grid (如果有图，显示前3张) */}
+                 {hasImages && (
+                   <div style={styles.imageGrid}>
+                     {images.slice(0, 3).map((img, idx) => (
+                       <div key={idx} style={{flex: 1, height: '100%', borderRadius: '4px', overflow:'hidden'}}>
+                         <img src={img} style={{width:'100%', height:'100%', objectFit:'cover'}} alt="" />
+                       </div>
+                     ))}
+                   </div>
+                 )}
+
+                 {/* 如果没图，显示文字摘要 */}
+                 {!hasImages && (
+                   <div style={{fontSize:'13px', color:'#888', marginBottom:'8px', lineHeight:'1.5'}}>
+                     {plainText}...
+                   </div>
+                 )}
+
+                 <div style={styles.postMeta}>
+                   <div style={{display:'flex', alignItems:'center', gap:'6px'}}>
+                     {/* 作者头像小图 */}
+                     <img 
+                        src={post.author_avatar_url || "https://img.cgbgear.cn/avatars/default.png"} 
+                        style={{width:'16px', height:'16px', borderRadius:'50%'}} 
+                        alt="" 
+                     />
+                     <span>{post.author_name}</span>
+                     {post.view_count > 1000 && <span style={{marginLeft:'5px'}}>{(post.view_count/10000).toFixed(1)}万阅读</span>}
+                   </div>
+                   <div>{formatDate(post.created_at)}</div>
+                 </div>
+               </div>
+             )
+           })
+        )}
+      </div>
+
+      {/* 底部导航占位，由 App.js 渲染 MobileBottomNav */}
+      <MobileBottomNav />
+    </div>
+  );
+};
+
+export default MobileHomePage;
