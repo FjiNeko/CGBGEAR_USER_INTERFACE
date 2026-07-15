@@ -1,3 +1,17 @@
+/*
+ * Copyright (C) 2026 FjiNeko
+ * * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -19,8 +33,6 @@ import {
 } from '../../api/api';
 import '../../css/AdminDashboard.css';
 
-// 修复公告格式问题，告知我用一些方法，改成类似于这样的样式：
-// <h2>尊敬的各位社群成员：</h2><p>为完善论坛功能、优化用户体验，并迎接即将到来的春节活动，CGBGEAR 论坛将于 <strong>2026年2月</strong> 正式启动公开测试。诚邀您作为核心用户参与，共同塑造论坛的初次亮相！</p><p>本次公测的核心安排如下：</p><ul>    <li><strong>预注册开放</strong>：2026年2月10日正式开放论坛注册通道。</li>    <li><strong>抢先注册奖励</strong>：前15位成功注册的成员将获得额外惊喜奖励（详情将于2月9日公布）。</li>    <li><strong>春节主题活动</strong>：2月14日至2月17日，论坛将同步上线春节限定主题与社区活动。</li></ul><p>公测期间，您可能会遇到功能调整或界面变化，这是优化过程的正常环节。如您遇到任何问题或有宝贵建议，欢迎通过以下方式反馈：</p><ul>    <li>发送邮件至：murdermobai0605@outlook.com</li>    <li>在官方社群群组内直接提出</li></ul><p><em>注：以上时间节点为暂定计划，如有调整我们将通过官方渠道第一时间通知。</em></p><p>感谢您一直以来的关注与支持！期待与您在 CGBGEAR 论坛相见。</p>
 
 // --- SVG Icons ---
 const Icons = {

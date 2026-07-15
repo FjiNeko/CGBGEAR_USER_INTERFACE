@@ -1,25 +1,16 @@
-// src/pages/ThreadPage.jsx
-
-
-
-// 根据ThreadPage.jsx，写一个手机帖子详情App的页面文件MobileThreadPage.jsx，保持引用的api、context、函数、mainNav、Sitefooter组件
-// 布局如下（由上往下）
-// 页面导航栏（不是MainNav)
-// 左侧：返回箭头按钮，用于回到上一级页面
-// 中间：双标签导航，包含“正文”和“回复”两个选项
-// 右侧：三个点
-// 内容主体区：
-// 内容有图则让对应的图片，符合尺寸的展示轮播图，在轮播图下面显示用户信息、内容标题、内容正文、时间
-// 内容没有没图，不显示轮播图，直接显示用户信息、内容标题、内容正文、时间
-// 回复区：
-// 内容互动数据栏（左侧回复 回复数（例如回复 3），右侧（点赞数），左右侧一个排序按钮<svg t="1771565677807" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7420" width="200" height="200"><path d="M437 885.4c-9.4 0-18.6-3.7-25.5-10.5L226.7 690.1c-14.1-14.1-14.1-36.9 0-50.9 14.1-14.1 36.9-14.1 50.9 0L401 762.5V178c0-19.9 16.1-36 36-36s36 16.1 36 36v671.4c0 14.6-8.8 27.7-22.2 33.3-4.5 1.8-9.2 2.7-13.8 2.7zM586 560c-19.9 0-36-16.1-36-36V178c0-14.6 8.8-27.7 22.2-33.3 13.5-5.6 29-2.5 39.2 7.9l169 169.5c14 14.1 14 36.9-0.1 50.9s-36.9 14-50.9-0.1L622 265.1V524c0 19.9-16.1 36-36 36zM802 761H676c-19.9 0-36-16.1-36-36s16.1-36 36-36h126c19.9 0 36 16.1 36 36s-16.1 36-36 36zM802 653H676c-19.9 0-36-16.1-36-36s16.1-36 36-36h126c19.9 0 36 16.1 36 36s-16.1 36-36 36zM802 869H676c-19.9 0-36-16.1-36-36s16.1-36 36-36h126c19.9 0 36 16.1 36 36s-16.1 36-36 36z" p-id="7421"></path><path d="M586.9 617m-36 0a36 36 0 1 0 72 0 36 36 0 1 0-72 0Z" p-id="7422"></path><path d="M586.9 725m-36 0a36 36 0 1 0 72 0 36 36 0 1 0-72 0Z" p-id="7423"></path><path d="M585.9 833m-36 0a36 36 0 1 0 72 0 36 36 0 1 0-72 0Z" p-id="7424"></path></svg>，点击后有三个选项热门、正序、倒叙、以及最底下的取消。
-// 无回复，则占位提示，灰色，“终端内没有检测到回复”
-// 有回复，垂直列表布局，包含独立评论卡片，每条卡片内部结构一致：回复用户信息栏（用户头像+用户名+等级标签，发布时间）、回复内容区、互动按钮区
-// 底部操作栏：左侧输入栏（来说点什么吧...)，右侧点赞按钮。
-// 手机回复不在使用tiptap组件
-// 选中正文就渲染（内容主体+回复区）
-// 选中回复就纯渲染（回复区）
-
+/*
+ * Copyright (C) 2026 FjiNeko
+ * * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
 
 import React, { useState, useEffect, useCallback } from 'react';
