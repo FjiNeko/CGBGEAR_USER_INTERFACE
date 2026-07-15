@@ -1,0 +1,70 @@
+/* 加载器覆盖层 */
+.loading-spinner-overlay {
+  position: fixed; /* 固定在屏幕上 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* 半透明黑色背景 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* 确保在最上层 */
+}
+
+/* 加载器容器，用于居中显示和可能的背景/阴影 */
+.loading-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* 可以添加一个背景和圆角，让它看起来更像一个浮动框 */
+  background-color: #2c2c2c; /* 深灰色背景 */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2); /* 绿色光晕效果 */
+}
+
+/* 实际的旋转条 */
+.loading-spinner {
+  width: 60px; /* 调整大小 */
+  height: 60px;
+  border: 4px solid #333; /* 基础圆环颜色 */
+  border-top: 4px solid #a3e635; /* 网页绿色作为旋转条颜色 */
+  border-radius: 50%;
+  animation: spin 1s linear infinite; /* 旋转动画 */
+  position: relative; /* 用于放置 Logo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px; /* 与文字间距 */
+}
+
+/* Logo 图片 */
+.spinner-logo {
+  width: 40px; /* Logo 大小，略小于旋转器 */
+  height: 40px;
+  border-radius: 50%; /* 如果 Logo 是方形的，可以使其变圆 */
+  object-fit: cover; /* 确保图片覆盖整个区域 */
+  animation: pulse 1.5s infinite ease-in-out; /* 让 Logo 有呼吸感 */
+}
+
+/* 旋转动画 */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Logo 呼吸动画 */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* 加载文字 */
+.loading-text {
+  color: #a3e635; /* 绿色文字 */
+  font-size: 16px;
+  font-weight: bold;
+}

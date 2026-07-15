@@ -1,0 +1,614 @@
+/* =========================================================
+   PREMIUM MODULE CSS FINAL VERSION
+   (HUD, RANK, FILTER, HERO VIDEO, VERTICAL CARDS)
+========================================================= */
+
+/* HUD 头像（保持原样） */
+.hud-avatar-wrap {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(144, 238, 144, 0.8);
+  box-shadow: 0 0 18px rgba(144, 238, 144, 0.34);
+}
+.hud-avatar-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+}
+
+/* 扫描线动画 */
+.hud-avatar-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 255, 0, 0.15),
+    transparent 40%,
+    transparent 60%,
+    rgba(0, 255, 0, 0.15)
+  );
+  mix-blend-mode: screen;
+  animation: scan 2.2s linear infinite;
+}
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* 角标 */
+.hud-corner { position: absolute; width: 32px; height: 32px; border: 1px solid rgba(144,238,144,0.7);}
+.hud-corner.tl { top: -6px; left: -6px; border-right:none;border-bottom:none;}
+.hud-corner.tr { top: -6px; right: -6px; border-left:none;border-bottom:none;}
+.hud-corner.bl { bottom: -6px; left: -6px; border-right:none;border-top:none;}
+.hud-corner.br { bottom: -6px; right: -6px; border-left:none;border-top:none;}
+
+/* 容器 */
+.premium-container {
+  width: 92%;
+  margin: 110px auto 60px;
+}
+.premium-title {
+  font-size: 28px;
+  font-weight: 900;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+.premium-sub { opacity: .8; font-size: 13px; }
+
+/* ===========================
+   HERO 轮播（与 index.html 一致 + 扫描线）
+=========================== */
+
+.premium-hero-carousel {
+  position: relative;
+  height: 70vh;
+  width: 100%;
+  margin-top: 70px;
+  overflow: hidden;
+}
+
+.premium-hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.premium-hero-slide.active { opacity: 1; }
+
+.premium-hero-slide img,
+.premium-hero-slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(70%);
+}
+
+/* 扫描线层（A 功能） */
+.premium-scan {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(0,255,0,0.07),
+    transparent 60%
+  );
+  mix-blend-mode: screen;
+  animation: heroScan 3s linear infinite;
+}
+@keyframes heroScan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* 首页统一渐变层 */
+.premium-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0) 45%),
+    linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0) 35%);
+}
+
+/* 网格层 */
+.premium-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.06;
+}
+
+/* 噪点层 */
+.premium-hero-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+  opacity: 0.08;
+}
+
+/* 文字淡入（B 功能） */
+.premium-hero-text {
+  position: absolute;
+  bottom: 16%;
+  left: 6%;
+  animation: fadeInHero 1.2s ease forwards;
+  opacity: 0;
+}
+@keyframes fadeInHero {
+  to { opacity: 1; }
+}
+.premium-hero-text h1 { font-size: 46px; font-weight: 900; }
+.premium-hero-text p { opacity: .85; }
+
+/* dots */
+.premium-hero-dots {
+  position: absolute;
+  bottom: 30px;
+  right: 40px;
+  display: flex;
+  gap: 8px;
+}
+.premium-hero-dots span {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.7);
+  cursor: pointer;
+}
+.premium-hero-dots span.active {
+  background: rgba(144,238,144,0.9);
+  border-color: rgba(144,238,144,0.9);
+}
+
+/* ===========================
+   风格筛选器（F 功能）
+=========================== */
+.filter-bar {
+  margin: 20px 0;
+  font-size: 14px;
+}
+.filter-bar select {
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 5px 10px;
+}
+
+/* ===========================
+   排行榜（E 功能）
+=========================== */
+.rank-board {
+  margin-top: 40px;
+  background: #141414;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 6px;
+}
+.rank-board h2 {
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+.rank-item {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+/* =================================================
+   纵向大卡片布局（你的重点需求）
+================================================= */
+
+#premium-vertical {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+}
+
+.big-player-card {
+  width: 100%;
+  background: #141414;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .3s ease;
+}
+
+.big-player-card:hover {
+  transform: translateY(-6px);
+}
+
+/* 顶部大图 */
+.big-card-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  filter: grayscale(100%);
+}
+
+/* 下方内容区 */
+.big-card-body {
+  padding: 20px 26px;
+}
+
+.big-player-name {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.big-player-tagline {
+  font-size: 14px;
+  opacity: .85;
+  margin-top: 6px;
+}
+
+.big-player-bio {
+  font-size: 14px;
+  opacity: .85;
+  margin-top: 14px;
+  line-height: 1.7;
+}
+
+.big-card-tags {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.big-card-tags span {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+/* ===========================
+   响应式
+=========================== */
+@media (max-width: 900px) {
+  .big-card-img { height: 300px; }
+  .premium-hero-carousel { height: 50vh; }
+  .premium-hero-text h1 { font-size: 34px; }
+}
+
+
+/* =========================================================
+   HUD 外环机能边框动画（新增）
+========================================================= */
+
+.hud-avatar-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/* 外环框线（动态能量环） */
+.hud-avatar-wrap::after {
+  content: "";
+  position: absolute;
+  inset: -8px;                       /* 外扩大 8px */
+  border-radius: 50%;
+  border: 2px solid rgba(144, 238, 144, 0.25);
+  box-shadow: 0 0 20px rgba(144, 238, 144, 0.3);
+  animation: hudPulse 2.8s ease-in-out infinite;
+}
+
+/* 能量脉冲动画 */
+@keyframes hudPulse {
+  0% {
+    opacity: 0.1;
+    transform: scale(0.96);
+    box-shadow: 0 0 10px rgba(144, 238, 144, 0.2);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.02);
+    box-shadow: 0 0 28px rgba(144, 238, 144, 0.45);
+  }
+  100% {
+    opacity: 0.1;
+    transform: scale(0.96);
+    box-shadow: 0 0 10px rgba(144, 238, 144, 0.2);
+  }
+}
+
+/* 四角 HUD 角标同步闪烁（不改变结构） */
+.hud-corner {
+  animation: cornerFlash 2.4s linear infinite;
+}
+
+@keyframes cornerFlash {
+  0%, 100% { border-color: rgba(144, 238, 144, 0.35); }
+  50% { border-color: rgba(144, 238, 144, 0.95); }
+}
+
+/* =========================================================
+   Premium 页面高级动画增强包
+========================================================= */
+
+/* --- 1. Big Player Card 入场动画（上滑 + 渐显） --- */
+.big-player-card {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.big-player-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- 2. Big Player Card HUD 扫描线 --- */
+.big-player-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+  background: linear-gradient(
+    to right,
+    transparent 20%,
+    rgba(144, 238, 144, 0.25),
+    transparent 80%
+  );
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.big-player-card.visible::before {
+  animation: cardScan 1.4s ease-out forwards;
+  opacity: 1;
+}
+@keyframes cardScan {
+  to { transform: translateX(100%); }
+}
+
+/* --- 3. Hero 标题打字机动画（战术 HUD 效果） --- */
+.premium-hero-text h1 {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  border-right: 2px solid rgba(144,238,144,0.75);
+  animation: typing 1.8s steps(20) forwards, cursorBlink .8s infinite;
+}
+@keyframes typing {
+  to { width: 100%; }
+}
+@keyframes cursorBlink {
+  50% { border-right-color: transparent; }
+}
+
+/* tagline 延迟淡入 */
+.premium-hero-text p {
+  opacity: 0;
+  animation: fadeText .8s ease forwards;
+  animation-delay: 1.9s;
+}
+@keyframes fadeText {
+  to { opacity: .85; }
+}
+
+/* --- 4. HUD 头像外圈脉冲（之前新增的继续保留） --- */
+.hud-avatar-wrap::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid rgba(144, 238, 144, 0.25);
+  animation: hudPulse 2.8s ease-in-out infinite;
+}
+@keyframes hudPulse {
+  0% { opacity: .15; transform: scale(.96); }
+  50% { opacity: .7; transform: scale(1.02); }
+  100% { opacity: .15; transform: scale(.96); }
+}
+
+
+/* ==========================================================
+   1. Big Player Card — HUD 四角角标（呼吸光动效）
+========================================================== */
+.big-player-card {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform .25s ease, box-shadow .25s ease;
+  overflow: hidden;
+}
+
+.big-player-card.tilt {
+  box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+}
+
+/* 四角 HUD */
+.big-player-card .hud-corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(144,238,144,0.55);
+  animation: hudCornerPulse 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.big-player-card .hud-corner.tl {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.big-player-card .hud-corner.tr {
+  top: 10px;
+  right: 10px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.big-player-card .hud-corner.bl {
+  bottom: 10px;
+  left: 10px;
+  border-right: none;
+  border-top: none;
+}
+
+.big-player-card .hud-corner.br {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+
+@keyframes hudCornerPulse {
+  0% { opacity: 0.22; }
+  50% { opacity: 0.95; }
+  100% { opacity: 0.22; }
+}
+
+
+/* ==========================================================
+   2. HERO 背景扫描矩阵（Matrix Grid 动画增强）
+========================================================== */
+
+.premium-hero-grid {
+  z-index: 4;
+  pointer-events: none;
+}
+
+.premium-hero-grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(144,238,144,0.25) 0px,
+    rgba(144,238,144,0.25) 1px,
+    transparent 2px,
+    transparent 6px
+  );
+  animation: dataMatrix 5s linear infinite;
+  opacity: 0.3;
+  mix-blend-mode: screen;
+}
+
+@keyframes dataMatrix {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100%);  }
+}
+
+
+/* ==========================================================
+   3. HERO HUD 粒子漂浮动画（前景层）
+========================================================== */
+
+.premium-hero-carousel {
+  position: relative;
+  z-index: 5;
+}
+
+.premium-hero-carousel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(144,238,144,0.22), transparent 60%),
+    radial-gradient(circle at 80% 45%, rgba(144,238,144,0.18), transparent 60%),
+    radial-gradient(circle at 50% 80%, rgba(144,238,144,0.18), transparent 70%);
+  background-size: 200% 200%;
+
+  animation: particleFloat 8s ease-in-out infinite;
+  mix-blend-mode: screen;
+  opacity: 0.28;
+}
+
+@keyframes particleFloat {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+
+/* ==========================================================
+   4. 修复 HERO 遮罩挡住 HUD 动画问题
+========================================================== */
+
+.premium-hero-gradient {
+  z-index: 2;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0) 45%),
+    linear-gradient(to right, rgba(0,0,0,0.45), rgba(0,0,0,0) 35%);
+}
+
+.premium-scan { z-index: 3; }
+.premium-hero-noise { z-index: 1; }
+
+
+/* ==========================================================
+   5. Big Player Card Fade-in 动画
+========================================================== */
+
+.big-player-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.big-player-card.visible {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+/* 手机竖屏：Premium 页面 */
+@media (max-width: 768px) {
+  .premium-container {
+    width: 94%;
+    margin: 90px auto 50px;
+  }
+
+  .premium-hero-carousel {
+    height: 52vh;
+    margin-top: 60px;
+  }
+
+  .premium-hero-text {
+    bottom: 14%;
+    left: 6%;
+    right: 6%;
+  }
+
+  .premium-hero-text h1 {
+    font-size: 26px;
+  }
+
+  .premium-hero-text p {
+    font-size: 13px;
+  }
+
+  #premium-vertical {
+    gap: 26px;
+  }
+
+  .big-card-img {
+    height: 260px;
+  }
+
+  .big-card-body {
+    padding: 14px 14px 18px;
+  }
+
+  .big-player-name {
+    font-size: 20px;
+  }
+
+  .big-player-bio {
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,149 @@
+/* --- 容器：最高层级，穿透点击 --- */
+.ny-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 999999; /* 确保在最顶层 */
+    pointer-events: none; /* 默认不阻挡用户操作 */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 100px; /* 倒计时显示在上方 */
+    transition: background 0.5s ease;
+}
+
+/* --- 倒计时框 --- */
+.ny-countdown-container {
+    background: rgba(168, 12, 12, 0.9);
+    border: 2px solid #FFD700;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    pointer-events: auto; /* 倒计时本身可以点击(虽然没交互) */
+    position: relative;
+    overflow: visible;
+}
+
+.ny-label {
+    color: #FFD700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.ny-timer {
+    font-family: 'Courier New', monospace;
+    font-size: 48px;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 2px 2px 0 #8B0000;
+}
+
+/* --- 最后10秒特效 --- */
+.ny-last-10 .ny-countdown-container {
+    background: rgba(255, 0, 0, 0.95);
+    box-shadow: 0 0 50px #FFD700, inset 0 0 20px #FFD700;
+    transform: scale(1.1);
+    transition: all 0.3s;
+}
+
+.ny-timer-shake {
+    color: #FFD700;
+    animation: timerShake 0.1s infinite;
+}
+
+@keyframes timerShake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    50% { transform: translate(-1px, -1px) rotate(-1deg); }
+    100% { transform: translate(1px, -1px) rotate(1deg); }
+}
+
+/* 策马奔腾动画容器 */
+.ny-horse-anim {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 100px;
+    pointer-events: none;
+    z-index: -1;
+    /* 这里你可以添加金箔粒子背景 */
+}
+
+.horse-silhouette {
+    font-size: 80px;
+    opacity: 0.3;
+    animation: gallop 0.5s infinite alternate;
+}
+
+@keyframes gallop {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+
+/* --- 跨年完成：全屏模式 --- */
+.ny-finished {
+    background-color: rgba(139, 0, 0, 0.95); /* 深红背景遮盖全屏 */
+    pointer-events: auto; /* 允许点击领红包(如果有交互) */
+    align-items: center;
+    padding-top: 0;
+}
+
+.ny-celebration {
+    text-align: center;
+    animation: zoomIn 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.ny-main-title {
+    font-size: 80px;
+    color: #FFD700;
+    margin: 0;
+    text-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    font-weight: 900;
+}
+
+.ny-sub-title {
+    font-size: 32px;
+    color: #fff;
+    margin: 10px 0 30px;
+    letter-spacing: 5px;
+}
+
+.ny-gift-tag {
+    display: inline-block;
+    background: linear-gradient(90deg, #FFD700, #FDB931);
+    color: #8B0000;
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* --- 红包雨 --- */
+.red-packet-rain {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.rp-item {
+    position: absolute;
+    top: -50px;
+    font-style: normal;
+    font-size: 40px;
+    animation: drop 3s linear infinite;
+}
+
+@keyframes drop {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}

@@ -1,0 +1,426 @@
+/*
+=========================================================
+                [SPRING FESTIVAL 2026 - YEAR OF THE HORSE]
+                          龙行马跃 · 限定样式表
+=========================================================
+*/
+
+/* 
+   ---------------------------------------------------------
+   1. 基础全局 & 变量定义 (Base & Variables)
+   ---------------------------------------------------------
+*/
+
+:root {
+  /* 新春配色系统 */
+  --spring-red: #C60C0C;        /* 标准中国红 */
+  --spring-red-dark: #8B0000;   /* 深沉暗红 */
+  --spring-gold: #FFD700;       /* 华丽金 */
+  --spring-gold-dark: #B8860B;  /* 古铜金 */
+  --spring-white: #FFF5E6;      /* 暖白(米绸色) */
+  
+  /* 终端兼容变量 */
+  --terminal-secondary-text-color: #D1D5DB;
+  --terminal-prompt-color: var(--spring-gold);
+  --terminal-border-color: var(--spring-red);
+  --terminal-shadow-color: rgba(198, 12, 12, 0.4);
+  
+  --mobile-nav-top-height: 50px;
+  --mobile-nav-bottom-height: 60px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: 'DingTalk JinBuTi';
+  src: url('../../fonts/DingTalk\ JinBuTi.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DingTalk Sans';
+  src: url('../../fonts/DingTalk\ Sans.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Body 基础样式 --- */
+body {
+  background: #0a0a0a;
+  color: #f5f5f5;
+  /* 修改这里，将你的自定义字体放在最前面 */
+  font-family: 'DingTalk Sans', 'DingTalk JinBuTi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Microsoft YaHei", sans-serif;
+  /* 确保为固定底部导航留出空间 */
+  padding-bottom: 0;
+  /* PC端默认0，移动端通过media query覆盖 */
+}
+.page {
+  background: #050505;
+  color: var(--spring-white);
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* 
+   ---------------------------------------------------------
+   2. 主导航栏 (Main Navigation)
+   ---------------------------------------------------------
+*/
+
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 导航栏新春红渐变 */
+.main-nav.nav-solid {
+  background: linear-gradient(90deg, #600000 0%, #C60C0C 50%, #600000 100%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), inset 0 -2px 10px rgba(255, 215, 0, 0.2);
+  border-bottom: 1px solid var(--spring-gold-dark);
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo 节日化：增加金色光晕 */
+.logo {
+  width: 85px;
+  height: 85px;
+  background: url("https://img.cgbgear.cn/logo2.png") no-repeat center center / contain;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+}
+
+/* Logo 旁边的马年快乐装饰 */
+.logo::after {
+  content: "马到成功";
+  position: absolute;
+  right: -50px;
+  top: 10px;
+  background: var(--spring-gold);
+  color: var(--spring-red-dark);
+  font-size: 10px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-weight: bold;
+  transform: rotate(5deg);
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+.nav-links .nav-link:hover {
+  color: var(--spring-gold) !important;
+}
+
+/* 激活态改为金色下划线 */
+.main-nav.nav-solid .nav-link:hover::after {
+  background: var(--spring-gold);
+  box-shadow: 0 0 10px var(--spring-gold);
+}
+
+.nav-link.active {
+  background: var(--spring-gold);
+  color: var(--spring-red-dark) !important;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+/* 
+   ---------------------------------------------------------
+   3. 交互按钮 & CTA (Buttons & Interactions)
+   ---------------------------------------------------------
+*/
+
+.nav-cta {
+  border-radius: 999px;
+  padding: 6px 18px;
+  font-size: 13px;
+  border: 1px solid var(--spring-gold);
+  color: var(--spring-gold);
+  background: transparent;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* 主要按钮：金色渐变+红字 */
+.nav-cta.primary {
+  background: linear-gradient(145deg, var(--spring-gold), var(--spring-gold-dark));
+  color: var(--spring-red-dark);
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.nav-cta:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--spring-gold);
+  background: var(--spring-white);
+  color: var(--spring-red);
+}
+
+/* 
+   ---------------------------------------------------------
+   4. Hero 区块 (Hero Section - Year of Horse)
+   ---------------------------------------------------------
+*/
+
+.hero {
+  position: relative;
+  height: 460px; /* 略微增加高度显示大气 */
+  background: var(--spring-red-dark);
+  overflow: hidden;
+}
+
+.hero-media {
+  /* 建议替换为马年专属大图 */
+  background-image: url("https://img.cgbgear.cn/wpage/spring-hero-horse.jpg"); 
+  filter: contrast(1.2) brightness(0.8);
+}
+
+/* 增加祥云浮动层 (伪元素模拟) */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url("https://www.transparenttextures.com/patterns/natural-paper.png"),
+              linear-gradient(180deg, transparent 70%, rgba(198, 12, 12, 0.4) 100%);
+  pointer-events: none;
+}
+
+.hero-tagline-label {
+  color: var(--spring-gold);
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-tagline-title {
+  color: var(--spring-white);
+  font-size: 32px;
+  /* 模拟毛笔质感 */
+  text-shadow: 2px 2px 0px var(--spring-red-dark), 4px 4px 10px rgba(0,0,0,0.8);
+}
+
+.hero-user-card {
+  border: 1px solid var(--spring-gold-dark);
+  background: rgba(139, 0, 0, 0.9); /* 深红卡片 */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.hero-user-handle {
+  color: var(--spring-gold);
+}
+
+/* 
+   ---------------------------------------------------------
+   5. 面板与卡片 (NV Panels & Cards)
+   ---------------------------------------------------------
+*/
+
+.banner-card {
+  border: 1px solid var(--spring-red);
+  background: #120000;
+}
+
+/* 扫描条改为金色闪过 */
+.banner-card::before {
+  background: linear-gradient(to right,
+      rgba(255, 215, 0, 0) 0%,
+      rgba(255, 215, 0, 0.3) 50%,
+      rgba(255, 215, 0, 0) 100%);
+}
+
+.banner-btn {
+  background: var(--spring-red);
+  color: var(--spring-white);
+}
+
+/* NV面板：赛博红黑风 */
+.nv-panel {
+  background: #1a0000;
+  border: 1px solid var(--spring-red-dark);
+}
+
+/* 面板扫描线改为红色 */
+.nv-panel::before {
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(198, 12, 12, 0.1) 50%,
+      transparent 100%);
+}
+
+/* 关键：面板四角增加金色剪纸角花 */
+.nv-panel::after {
+  content: "";
+  background: 
+    linear-gradient(to right, var(--spring-gold), var(--spring-gold)) top left / 20px 2px,
+    linear-gradient(to bottom, var(--spring-gold), var(--spring-gold)) top left / 2px 20px,
+    linear-gradient(to left, var(--spring-gold), var(--spring-gold)) top right / 20px 2px,
+    linear-gradient(to bottom, var(--spring-gold), var(--spring-gold)) top right / 2px 20px;
+  background-repeat: no-repeat;
+  animation: nvBorderFlash 2s infinite;
+}
+
+.panel-title-main {
+  color: var(--spring-gold);
+}
+
+/* 
+   ---------------------------------------------------------
+   6. 统计面板 & 列表 (Stats & Lists)
+   ---------------------------------------------------------
+*/
+
+.stats-panel {
+  border-color: var(--spring-gold-dark);
+  background: linear-gradient(180deg, #1a0000 0%, #000 100%);
+}
+
+.stats-icon-svg path {
+  fill: var(--spring-gold); /* 图标全部变金 */
+}
+
+.post-item {
+  border-bottom: 1px solid rgba(198, 12, 12, 0.2);
+}
+
+.post-item:hover {
+  background: rgba(198, 12, 12, 0.05);
+}
+
+.section-more:hover {
+  color: var(--spring-gold);
+}
+
+/* 
+   ---------------------------------------------------------
+   7. 节日加载与特殊效果 (Animations & Feedbacks)
+   ---------------------------------------------------------
+*/
+
+/* 模拟灯笼呼吸光感动画 */
+@keyframes lanternGlow {
+  0%, 100% { box-shadow: 0 0 10px rgba(198, 12, 12, 0.5); }
+  50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.6); }
+}
+
+.nav-cta.primary {
+  animation: lanternGlow 3s infinite;
+}
+
+/* 修改滚动条颜色为红金 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--spring-red-dark);
+  border-radius: 10px;
+  border: 1px solid var(--spring-gold-dark);
+}
+
+/* 
+   ---------------------------------------------------------
+   8. 页脚 (Footer & Seasonal Info)
+   ---------------------------------------------------------
+*/
+
+.footer {
+  border-top: 2px solid var(--spring-gold-dark);
+  background: linear-gradient(0deg, #300000 0%, #0a0a0a 100%);
+}
+
+.footer-link:hover {
+  color: var(--spring-gold);
+}
+
+/* 版权处增加春字小动画 */
+.footer-bottom::after {
+  content: " 🧧 丙午马年 · 万事大吉";
+  color: var(--spring-gold);
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+/* 
+   ---------------------------------------------------------
+   9. 移动端适配 (Mobile Responsive - Spring Style)
+   ---------------------------------------------------------
+*/
+
+@media (max-width: 767px) {
+  .main-nav {
+    background: var(--spring-red-dark) !important;
+  }
+  
+  .mobile-nav-item.active {
+    color: var(--spring-gold) !important;
+  }
+  
+  .hero-tagline-title {
+    font-size: 24px;
+  }
+}
+
+/* 
+   ---------------------------------------------------------
+   10. 用户中心新春版 (User Center - Red Theme)
+   ---------------------------------------------------------
+*/
+
+.uc-hero-card {
+  border: 1px solid var(--spring-gold);
+  background: radial-gradient(circle at top right, #600000, #0a0a0a);
+}
+
+.uc-username {
+  color: var(--spring-gold);
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.uc-avatar-wrapper .uc-avatar-directly {
+  border: 3px solid var(--spring-gold) !important;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4) !important;
+}
+
+.uc-points-info .value {
+  color: var(--spring-gold);
+}
+
+.uc-progress-fill {
+  background: linear-gradient(90deg, var(--spring-red), var(--spring-gold));
+  box-shadow: 0 0 10px var(--spring-gold);
+}
+
+.uc-btn.primary {
+  background: var(--spring-gold);
+  color: var(--spring-red-dark);
+}
+
+/* 
+=========================================================
+                      SPRING END
+=========================================================
+*/
