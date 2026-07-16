@@ -1,4 +1,4 @@
-# CGBGEAR 论坛原网站源码（前端）
+# CGBGEAR论坛原网站源码（前端）
 
 欢迎来到 **CGBGEAR** 论坛的开源前端仓库！本仓库命名为 `USER_INTERFACE`。
 
