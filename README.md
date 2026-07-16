@@ -1,18 +1,37 @@
-# React + Vite
+# CGBGEAR 论坛原网站源码（前端）
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+欢迎来到 **CGBGEAR** 论坛的开源前端仓库！本仓库命名为 `USER_INTERFACE`。
 
-Currently, two official plugins are available:
+> 💡 **项目说明**：FjiNeko 与 @DayingNeko 均为本人。该项目于 2025 年 11 月正式落地并开始建设，历时将近一年的持续开发与迭代。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## 📂 项目目录（持续更新）
 
-Note: This will impact Vite dev & build performances.
+*   **前端（当前仓库）**：👉 [点击跳转到前端 Github 仓库](https://github.com/FjiNeko/CGBGEAR_USER_INTERFACE)
+*   **后端仓库**：👉 [点击跳转到后端 Github 仓库](https://github.com/FjiNeko/CGBGEAR_SERVER)
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## 🔍 这是个什么项目？
+
+原网站 [www.cgbgear.cn](http://www.cgbgear.cn) 是一个**独立自创的军警垂直领域论坛平台**。后因用户基数较小、维护资金不足以及人力成本过高，导致平台遗憾无法继续维持常态化运营。
+
+
+
+## 📂 为什么选择开源？
+
+本网站的**全栈代码编写、架构设计以及日常运营均由我一人独立完成**。
+
+虽然项目早期发起人曾尝试招聘过相关人员，但后续加入的成员均未参与过实质性的代码开发与后台管理。因此，该项目的完整代码所有权**严格隶属于本人**。
+
+鉴于个人精力有限、无力继续独自维护与开发，我决定将完整的项目代码无保留开源，希望能给有需要的朋友提供参考或帮助。
+
+## 📄 开源协议
+
+本项目代码严格遵循 **[AGPL-3.0](https://choosealicense.com/licenses/agpl-3.0/)** 开源协议。请在遵守协议条款的前提下使用、修改和分发代码。
+
+---
+
+**Written by FjiNeko**  
+*Update: 2026/07/16*
