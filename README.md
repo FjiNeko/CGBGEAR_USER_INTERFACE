@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/license-AGPL--3.0-blue.svg" align="absmiddle" alt="license" />
-  <img src="https://img.shields.io/badge/python-3.10%2B-blue.svg" align="absmiddle" alt="python" />
+  <img src="https://img.shields.io/badge/Vite-7.2.4-blue?logo=vite" align="absmiddle" alt="vite" />
   <img src="https://img.shields.io/badge/version-latest-green.svg" align="absmiddle" alt="version" />
   <img src="https://img.shields.io/badge/platform-Linux-lightgrey.svg" align="absmiddle" alt="platform" />
 </p>
