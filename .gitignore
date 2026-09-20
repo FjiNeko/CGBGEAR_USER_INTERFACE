@@ -7,27 +7,51 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Dependencies
+node_modules/
+
+# Production build output
+dist/
+dist-ssr/
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
 *.local
-.vscode
-.idea
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.well-known
-js
+
+# Compressed archives (prevent accidental commits)
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+*.tgz
+*.bz2
+*.xz
+
+# Editor & temporary backup files
+* copy.*
+* copy*.*
+*.bak
+*.backup
+*.old
+*.orig
+*~
+*.sw?
+
+# Server configuration files
 .htaccess
+.user.ini
+.well-known
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
