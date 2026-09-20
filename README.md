@@ -7,20 +7,24 @@
   <img src="https://img.shields.io/badge/platform-Linux-lightgrey.svg" align="absmiddle" alt="platform" />
 </p>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/ALERT-yellow.svg" align="absmiddle" alt="ALERT" /> <strong>安全与开源规范告示</strong>：仓库已剔除全部历史遗留压缩归档与冗余副本，严禁将包含真实私密凭据的 .env 配置文件提交至公开仓库，请参考 .env.example 自行配置私有环境变量。
+</p>
+
 欢迎来到 **CGBGEAR** 论坛的开源前端仓库！本仓库命名为 `USER_INTERFACE`。
 
-> 💡 **项目说明**：FjiNeko 与 @DayingNeko 均为本人。该项目于 2025 年 11 月正式落地并开始建设，历时将近一年的持续开发与迭代。
+> **项目说明**：FjiNeko 与 @DayingNeko 均为本人。该项目于 2025 年 11 月正式落地并开始建设，历时将近一年的持续开发与迭代。
 
-## 📂 项目目录（持续更新）
+## 项目目录（持续更新）
 
-*   **前端（当前仓库）**：👉 [点击跳转到前端 Github 仓库](https://github.com/FjiNeko/CGBGEAR_USER_INTERFACE)
-*   **后端仓库**：👉 [点击跳转到后端 Github 仓库](https://github.com/FjiNeko/CGBGEAR_SERVER)
+*   **前端（当前仓库）**：[点击跳转到前端 Github 仓库](https://github.com/FjiNeko/CGBGEAR_USER_INTERFACE)
+*   **后端仓库**：[点击跳转到后端 Github 仓库](https://github.com/FjiNeko/CGBGEAR_SERVER)
 
-## 🔍 这是个什么项目？
+## 这是个什么项目？
 
 原网站 [www.cgbgear.cn](http://www.cgbgear.cn) 是一个**独立自创的军警垂直领域论坛平台**。后因用户基数较小、维护资金不足以及人力成本过高，导致平台遗憾无法继续维持常态化运营。
 
-## 📂 为什么选择开源？
+## 为什么选择开源？
 
 本网站的**全栈代码编写、架构设计以及日常运营均由我一人独立完成**。
 
@@ -28,7 +32,7 @@
 
 鉴于个人精力有限、无力继续独自维护与开发，我决定将完整的项目代码无保留开源，希望能给有需要的朋友提供参考或帮助。
 
-## 🛠️ 本地开发与环境配置
+## 本地开发与环境配置
 
 本项目基于 React 19 + Vite 构建：
 
@@ -54,15 +58,7 @@
    npm run build
    ```
 
-## 🔒 安全与开源规范告示
-
-1. **归档与冗余清理**：
-   - 仓库中原先误提交的遗留全站代码压缩包（`cgbgear_8Eyks.7z`）以及冗余副本文件（`HomePage copy.jsx`）已全面清理。
-   - `.gitignore` 已增加对各类压缩归档（`*.7z`, `*.zip`, `*.rar`, `*.tar`, `*.gz` 等）及编辑器备份文件的严格拦截。
-2. **环境变量隔离**：
-   - 本地私有环境变量文件（`.env`, `.env.local` 等）已被 `.gitignore` 保护，请勿将私有配置与秘钥上传至公共仓库。
-
-## 📄 开源协议
+## 开源协议
 
 本项目代码严格遵循 **[AGPL-3.0](https://choosealicense.com/licenses/agpl-3.0/)** 开源协议。请在遵守协议条款的前提下使用、修改和分发代码。
 
